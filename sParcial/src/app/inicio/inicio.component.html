@@ -1,0 +1,93 @@
+<head>
+  <base href="/">
+</head>
+
+    <div *ngIf="!logeado" class="container-fluid" style="width:80%" >
+Nombre<br>
+<input type="text" name="usuario" [(ngModel)]="inputNombre"><br>
+Password<br>
+<input type="text" name="password" [(ngModel)]="inputPassword"><br>
+<div class="radio">
+  <label><input type="radio" [(ngModel)]="tipo" name="tipo" value="Jefe"  name="optradio">Jefe</label>
+</div>
+<div class="radio">
+  <label><input type="radio" value="Operario" checked name="optradio">Operario</label>
+</div>
+<button class="btn btn-primary" (click)="logearse()">Logearse</button><br></div>
+<div *ngIf="logeado" class="container-fluid" style="width:60%">
+<table class="table table-condensed" style="background-color: white">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Tipo</th>
+      <th>Edad</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let empleado of listado">
+    <tr  *ngIf="empleado.tipo =='Jefe'" [appColor]="'green'">
+    
+      <td>{{empleado.id}}</td>
+      <td>{{empleado.nombre}}</td>
+      <td>{{empleado.tipo}}</td>
+      <td>{{empleado.edad}}</td>
+      <td><img src="{{empleado.foto}}" style="width:50px;height:50px;" ></td>
+      <td><app-borrar-empleado [id]="empleado.id"></app-borrar-empleado></td>
+   <!--   <td><button class="btn btn-danger" name="{{empleado.id}}" (click)="borrar(empleado.id)">Borrar</button></td>-->
+      
+    </tr>
+    <tr  *ngIf="empleado.tipo =='Operario'" >
+        
+          <td>{{empleado.id}}</td>
+          <td>{{empleado.nombre}}</td>
+          <td>{{empleado.tipo}}</td>
+          <td>{{empleado.edad}}</td>
+          <td><img src="{{empleado.foto}}" style="width:50px;height:50px;" ></td>
+          <td><app-borrar-empleado [id]="empleado.id"></app-borrar-empleado></td>
+       <!--   <td><button class="btn btn-danger" name="{{empleado.id}}" (click)="borrar(empleado.id)">Borrar</button></td>-->
+          
+        </tr>
+  
+      
+
+
+</tbody>
+</table>
+
+
+
+<div class="checkbox" style="text-align:center;display:block;margin:auto" >
+  <label><input type="checkbox" (change)="Check()" value="editar">Editar</label>
+</div>
+<br>
+
+
+
+<form *ngIf="editar"  id="formulario">
+  <div class="form-group">
+    <label for="nombre">Nombre</label>
+    <input type="text"  [(ngModel)]="nombre" name="nombre" class="form-control" id="nombre">
+  </div>
+  <div class="form-group">
+    <label for="nombre">Password</label>
+    <input type="password"  [(ngModel)]="pass" name="pass" class="form-control" id="pass">
+  </div>
+  <div class="form-group">
+    <label for="edad">Edad</label>
+    <input type="number" [(ngModel)]="edad" name="edad" class="form-control" id="edad">
+  </div>
+  
+  <div class="radio">
+  <label><input type="radio" [(ngModel)]="tipo" name="tipo" value="Jefe"  name="optradio">Jefe</label>
+</div>
+<div class="radio">
+  <label><input type="radio" value="Operario" checked name="optradio">Operario</label>
+</div>
+
+  <button class="btn btn-default" (click)="Guardar()">Guardar</button>
+</form>
+<br><br>
+
+</div>
+
+
